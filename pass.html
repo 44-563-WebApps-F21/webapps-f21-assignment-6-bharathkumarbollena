@@ -2,78 +2,89 @@
 <html>
  <head>
     <title>javascript</title>
+  
  </head>
 <body>
 <h1>Pass phraseby Bollena Bharath Kumar</h1>
 <h2>Getting input</h2>
 
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
 
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
-
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
-
-
-<p id="result">This text will be replaced </p>
-
-<script> 
-
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
-    
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-</script>
-
-<div class="container">
     <form>
-        <label for="form1_age">Enter the secret phrase </label>
-        <input type="password" id="form1_age" name="form1_age" min=10 max=50 step=2 value="Let me in"> <br>
-
-        <label for="form1_nick">Enter a phrase </label>
-        <input type="text" id="form1_nick" name="form1_nick" autofocus> <br>
+        <div>
+            <label for="secret_phrase">Enter the secret phrase </label>
+            <input type ="password" id="secret_phrase" name="secret_phrase" value="Let me in"> 
+        </div><br>
+        <div>
+            <label for="check_phrase">Enter a phrase </label>
+            <input type ="text" id="check_phrase" name="check_phrase" autofocus>
+        </div><br>
 
         <input type="button" onclick="processPhrase()" value="Check the phrase">
     </form>
-</div>
 
-<div class="container">
+
     <p id="result">This text will be replaced </p>
 </div>
 
-<script>
-    let correct = 0;
-    let wrong = 0;
 
-    function processPhrase() {
-        console.log("Getting form values")
-        password = document.getElementById("form1_age").value
-        guess = document.getElementById("form1_age").value
+<div class="container">
+    <img id="animal-image" width="200" height="200" src="Elephant.jpg" alt="Picture of Elephant" onclick="newImage()">
+</div>
 
-        out = document.getElementById("result")
-        if (password == guess) {
-            alert("Access allowed")
-            correct = correct + 1
-            out.innerHTML = "correct : " + correct + " " + "wrong : " + wrong
-        } else {
-            alert("Access denied")
-            wrong = wrong + 1
-            out.innerHTML = "correct : " + correct + " " + "wrong : " + wrong
+<script> 
+var correct = 0;
+var wrong = 0;
+var counterP= 0;
+var counterN= 0;
+function processPhrase (){
+
+console.log("Getting form values")
+secret_phrase = document.getElementById("secret_phrase").value
+check_phrase = document.getElementById("check_phrase").value
+
+out = document.getElementById("result")
+if(secret_phrase == check_phrase){
+    counterN=0 ;
+    correct += 1
+    out.innerHTML = "Correct Count: " + correct
+    alert("Access allowed.")
+} else {
+    counterN ++;
+    wrong += 1
+    out.innerHTML = "Wrong Count: " + wrong
+    alert("Access denied.")
+    if(counterN >= 3){
+        if(wrong >=3){
+            incorrectPassphrase()
         }
     }
+
+}
+}
+
+function incorrectPassphrase(){
+alert("account locked")
+}
+
+var usingImage = 1;
+function newImage() {
+switch (usingImage) {
+    case 1:
+        document.getElementById("animal-image").src = "Elephant.jpg"
+        usingImage = 2
+        break
+    case 2:
+        document.getElementById("animal-image").src = "lion.jpeg"
+        usingImage = 3
+        break
+    case 3:
+        document.getElementById("animal-image").src = "bengal-tiger.jpg"
+        usingImage = 1
+        break
+}
+}
 </script>
+
 
 </body>
 </html> 
